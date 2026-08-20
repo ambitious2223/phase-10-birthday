@@ -9,11 +9,11 @@
 .player-badge {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
+  gap: 16px;
+  padding: 12px 24px;
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   z-index: 10;
   transition: all 0.3s ease;
@@ -37,25 +37,25 @@
 }
 
 .badge-avatar {
-  width: 32px;
-  height: 32px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: linear-gradient(135deg, #475569, #334155);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.15);
   flex-shrink: 0;
 }
 
 .badge-avatar-active { border-color: #fbbf24; box-shadow: 0 0 8px rgba(251, 191, 36, 0.4); }
-.badge-info { display: flex; flex-direction: column; gap: 1px; }
-.badge-name { font-weight: 700; font-size: 0.75rem; color: #fff; line-height: 1.1; }
-.badge-phase { font-size: 0.6rem; color: #a3e635; font-weight: 600; }
-.badge-card-pill { font-size: 0.65rem; font-weight: 700; color: #fbbf24; padding: 2px 8px; background: rgba(255, 255, 255, 0.08); border-radius: 10px; white-space: nowrap; }
+.badge-info { display: flex; flex-direction: column; gap: 2px; }
+.badge-name { font-weight: 700; font-size: 1rem; color: #fff; line-height: 1.2; }
+.badge-phase { font-size: 0.8rem; color: #a3e635; font-weight: 600; }
+.badge-card-pill { font-size: 0.85rem; font-weight: 700; color: #fbbf24; padding: 4px 12px; background: rgba(255, 255, 255, 0.08); border-radius: 12px; white-space: nowrap; }
 
 /* ======================== PHASE TRACKER ======================== */
 

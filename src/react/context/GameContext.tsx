@@ -13,15 +13,43 @@ interface GameContextType {
 
 const GameContext = createContext<GameContextType | null>(null);
 
-export function GameProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(gameStateReducer, createInitialState([
+const STORAGE_KEY = 'phase10_game_state';
+
+function loadSavedState(): GameState | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && parsed.players && parsed.drawPile) return parsed as GameState;
+  } catch {}
+  return null;
+}
+
+function saveState(state: GameState) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {}
+}
+
+function getInitialState(): GameState {
+  const saved = loadSavedState();
+  if (saved) return saved;
+  return createInitialState([
     { name: `${birthdayConfig.birthdayGirlName}`, type: 'human' },
     { name: birthdayConfig.friend1Name, type: 'bot' },
     { name: birthdayConfig.friend2Name, type: 'bot' },
-  ]));
+  ]);
+}
+
+export function GameProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(gameStateReducer, undefined, getInitialState);
 
   const stateRef = useRef(state);
   stateRef.current = state;
+
+  useEffect(() => {
+    saveState(state);
+  }, [state]);
 
   const startGame = useCallback((configs: { name: string; type: 'human' | 'bot' }[]) => {
     dispatch({ type: 'START_GAME', configs });
