@@ -1,0 +1,197 @@
+/* ======================== CARDS ======================== */
+
+.card-wrapper {
+  --accent: #888;
+  width: 80px;
+  height: 112px;
+  position: relative;
+  user-select: none;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.card-wrapper-small {
+  width: 42px;
+  height: 58px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  overflow: hidden;
+  backface-visibility: hidden;
+  background: #fff;
+}
+
+.card-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back-face {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-selected-inner .card-front {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.5), 0 0 16px rgba(251, 191, 36, 0.3);
+}
+
+.card-wild .card-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 20%,
+    rgba(255, 0, 128, 0.12) 30%,
+    rgba(0, 255, 128, 0.12) 40%,
+    rgba(0, 128, 255, 0.12) 50%,
+    rgba(255, 255, 0, 0.12) 60%,
+    rgba(255, 0, 255, 0.12) 70%,
+    transparent 80%
+  );
+  background-size: 200% 200%;
+  animation: holoShift 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: 8px;
+  z-index: 5;
+}
+
+@keyframes holoShift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Corner arcs */
+.corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  overflow: hidden;
+}
+
+.corner-tl { top: 0; left: 0; }
+.corner-br { bottom: 0; right: 0; }
+
+.corner-tl::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.corner-br::before {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  right: -14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.corner-number {
+  position: absolute;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #fff;
+  z-index: 1;
+  line-height: 1;
+}
+
+.corner-tl .corner-number { top: 3px; left: 4px; }
+.corner-br .corner-number { bottom: 3px; right: 4px; transform: rotate(180deg); }
+
+.corner-letter {
+  position: absolute;
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: #fff;
+  z-index: 1;
+  line-height: 1;
+}
+
+.corner-tl .corner-letter { top: 4px; left: 5px; }
+.corner-br .corner-letter { bottom: 4px; right: 5px; transform: rotate(180deg); }
+
+.card-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.center-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.center-text {
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.wild-text { color: #d32f2f; }
+.skip-text { color: #1565c0; }
+.wild-cake { font-size: 1.6rem; line-height: 1; }
+
+.card-back-inner {
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1a3a6b 0%, #0d2240 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.card-back-logo {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+}
+
+/* Small card overrides */
+.card-wrapper-small .corner { width: 16px; height: 16px; }
+.card-wrapper-small .corner-tl::before { width: 20px; height: 20px; top: -8px; left: -8px; }
+.card-wrapper-small .corner-br::before { width: 20px; height: 20px; bottom: -8px; right: -8px; }
+.card-wrapper-small .corner-number { font-size: 0.4rem; }
+.card-wrapper-small .corner-tl .corner-number { top: 2px; left: 2px; }
+.card-wrapper-small .corner-br .corner-number { bottom: 2px; right: 2px; }
+.card-wrapper-small .corner-letter { font-size: 0.35rem; }
+.card-wrapper-small .center-number { font-size: 1.1rem; }
+.card-wrapper-small .center-text { font-size: 0.5rem; }
+
+@media (max-width: 768px) {
+  .card-wrapper { width: 62px; height: 88px; }
+  .card-wrapper-small { width: 34px; height: 48px; }
+  .card-wrapper .center-number { font-size: 1.5rem; }
+  .card-wrapper .center-text { font-size: 0.7rem; }
+  .card-wrapper .wild-cake { font-size: 1.2rem; }
+}

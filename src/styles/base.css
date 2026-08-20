@@ -1,0 +1,141 @@
+/* ======================== RESET & BASE ======================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #061f17;
+  color: #e8e8e8;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ======================== GAME BOARD ======================== */
+
+.game-board {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto;
+  height: 100vh;
+  gap: 6px;
+  padding: 8px 16px;
+  background: radial-gradient(ellipse at 50% 60%, #185a44 0%, #0c3628 50%, #061f17 100%);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  position: relative;
+}
+
+.game-board::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,0.06), transparent),
+    radial-gradient(1px 1px at 50% 80%, rgba(255,255,255,0.04), transparent),
+    radial-gradient(1px 1px at 10% 70%, rgba(255,255,255,0.05), transparent),
+    radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,0.07), transparent),
+    radial-gradient(1px 1px at 40% 50%, rgba(255,255,255,0.03), transparent),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.05), transparent);
+  animation: moteFloat 20s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes moteFloat {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-5px, 8px) scale(1.02); opacity: 0.8; }
+  100% { transform: translate(5px, -5px) scale(0.98); opacity: 0.5; }
+}
+
+.game-board > * {
+  position: relative;
+  z-index: 1;
+}
+
+.table-tilt {
+  transform: rotateX(6deg);
+  transform-origin: center top;
+}
+
+.game-board.shake {
+  animation: screenShake 0.4s ease-out;
+}
+
+@keyframes screenShake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-4px, 2px) rotate(-0.5deg); }
+  20% { transform: translate(4px, -2px) rotate(0.5deg); }
+  30% { transform: translate(-3px, 1px) rotate(-0.3deg); }
+  40% { transform: translate(3px, -1px) rotate(0.3deg); }
+  50% { transform: translate(-2px, 1px); }
+  60% { transform: translate(2px, -1px); }
+  70% { transform: translate(-1px, 0); }
+}
+
+.cinematic-zoom {
+  animation: cinematicZoom 1.2s ease-in-out;
+}
+
+@keyframes cinematicZoom {
+  0% { transform: rotateX(6deg) scale(1); }
+  25% { transform: rotateX(2deg) scale(1.12) translateY(-10px); }
+  60% { transform: rotateX(2deg) scale(1.12) translateY(-10px); }
+  100% { transform: rotateX(6deg) scale(1); }
+}
+
+/* ======================== HEADER ======================== */
+
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.game-header h1 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fbbf24;
+  text-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+  letter-spacing: 2px;
+}
+
+.round-info {
+  font-size: 0.8rem;
+  color: #a3a3a3;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.turn-info {
+  font-size: 0.85rem;
+  color: #a3a3a3;
+  font-weight: 600;
+  margin-left: auto;
+  transition: color 0.3s ease;
+}
+
+.turn-info-active {
+  color: #4ade80;
+  text-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+}
+
+/* ======================== RESPONSIVE ======================== */
+
+@media (max-width: 768px) {
+  .game-board { padding: 6px 8px; gap: 4px; }
+}
