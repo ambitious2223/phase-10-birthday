@@ -1,0 +1,31 @@
+{
+  "name": "phase10",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:playwright": "npx playwright test",
+    "guard": "npm test && tsc --noEmit"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "motion": "^13.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.12",
+    "@vitejs/plugin-react": "^6.1.0",
+    "react-refresh": "^0.18.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.11"
+  }
+}
